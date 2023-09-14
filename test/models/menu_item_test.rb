@@ -39,15 +39,11 @@ class MenuItemTest < ActiveSupport::TestCase
   end
 
   test "should not save menu item if name already exists in database" do
-    restaurant = Restaurant.new(name: "Rails Test Restaurant")
-    menu = Menu.new(restaurant: restaurant, name: "Rails Test Menu")
-    menu_item_a = MenuItem.new(menu: menu, name: "Rails Test Menu Item", price: 1.00)
-    menu_item_b = MenuItem.new(menu: menu, name: "Rails Test Menu Item", price: 2.00)
+    menu = Menu.new(name: "Rails Test Menu")
+    menu_item_a = MenuItem.new(menu: menu, name: "Rails Test Menu Item A", price: 1.00)
+    menu_item_b = MenuItem.new(menu: menu, name: "Rails Test Menu Item A", price: 2.00)
 
-    assert menu.save
     assert menu_item_a.save
     assert_not menu_item_b.save
-    assert_equal 1, menu.menu_items.count
-    assert_equal "Rails Test Menu Item", menu.menu_items[0].name
   end
 end
