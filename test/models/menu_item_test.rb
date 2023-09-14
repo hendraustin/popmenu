@@ -2,11 +2,14 @@ require "test_helper"
 
 class MenuItemTest < ActiveSupport::TestCase
   test "should save menu item with menu, name, and price" do
-    menu = Menu.new(name: "Rails Test Menu")
+    restaurant = Restaurant.new(name: "Rails Test Restaurant")
+    menu = Menu.new(restaurant: restaurant, name: "Rails Test Menu")
     menu_item = MenuItem.new(menu: menu, name: "Rails Test Menu Item", price: 1.00)
 
+    assert menu.save
     assert menu_item.save
-    assert 1, menu.menu_items.count
+    assert_equal 1, menu.menu_items.count
+    assert_equal "Rails Test Menu Item", menu.menu_items[0].name
   end
 
   test "should not save menu item without menu" do
@@ -33,5 +36,14 @@ class MenuItemTest < ActiveSupport::TestCase
     menu_item = MenuItem.new()
 
     assert_not menu_item.save, "Saved the menu without a name and price"
+  end
+
+  test "should not save menu item if name already exists in database" do
+    menu = Menu.new(name: "Rails Test Menu")
+    menu_item_a = MenuItem.new(menu: menu, name: "Rails Test Menu Item A", price: 1.00)
+    menu_item_b = MenuItem.new(menu: menu, name: "Rails Test Menu Item A", price: 2.00)
+
+    assert menu_item_a.save
+    assert_not menu_item_b.save
   end
 end
