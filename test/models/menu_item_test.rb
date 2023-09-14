@@ -12,7 +12,7 @@ class MenuItemTest < ActiveSupport::TestCase
   test "should not save menu item without menu" do
     menu_item = MenuItem.new(name: "Rails Test Menu Item", price: 1.00)
 
-    assert_not menu_item.save, "Saved without menu"
+    assert_not menu_item.save, "Saved the menu item without menu"
   end
 
   test "should not save menu item without name" do
@@ -30,7 +30,7 @@ class MenuItemTest < ActiveSupport::TestCase
   end
 
   test "should not save menu item without name and price" do
-    menu_item = MenuItem.new
+    menu_item = MenuItem.new()
 
     assert_not menu_item.save, "Saved the menu without a name and price"
   end
