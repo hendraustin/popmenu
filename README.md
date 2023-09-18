@@ -1,24 +1,30 @@
-# README
+# Popmenu Assessment
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Hey there, thanks again for the opportunity to try this assessment out!
 
-Things you may want to cover:
+# Running the Rake Task
 
-* Ruby version
+Navigate to the `popmenu` application directory and run the following command:
 
-* System dependencies
+```
+rake 'import_data:from_json[lib/assets/data.json]'
+```
 
-* Configuration
+This will generate and save the records from the given json if it doesn't already exist in the database, along with logging a pass/fail for said record.
 
-* Database creation
+# Models
 
-* Database initialization
+## Restaurant
 
-* How to run the test suite
+Name: `String`
 
-* Services (job queues, cache servers, search engines, etc.)
+## Menu
 
-* Deployment instructions
+Restaurant: `Restaurant`\
+Name: `String`
 
-* ...
+## Menu Item
+
+Menu: `Menu`\
+Name: `String`\
+Price: `Float`
